@@ -1,0 +1,16 @@
+{
+  "name": "HandmadeHero.js",
+  "description": "A starter project for AngularJS",
+  "version": "0.0.0",
+  "homepage": "HandemadeHero in javascript",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "latest",
+    "angular-route": "~1.4.0",
+    "angular-loader": "~1.4.0",
+    "angular-mocks": "~1.4.0",
+    "jquery": "latest",
+    "jcanvas": "latest"
+  }
+}

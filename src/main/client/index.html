@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+    <html lang="en" ng-app="HandmadeHero">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" >
+  <title>HandmadeHero.js</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body ng-controller="gameController">
+
+  <canvas id="screen"></canvas>
+  <canvas id="buffer" ng-hide="true"></canvas>
+
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+
+  <script src="app.js"></script>
+  <script src="core/applicationState.js"></script>
+  <script src="core/gameController.js"></script>
+  <script src="core/performance.js"></script>
+  <script src="core/rendering.js"></script>
+  <script src="core/input.js"></script>
+  <script src="core/gameEvents.js"></script>
+  <script src="core/gameLoop.js"></script>
+  <script src="core/gameStartup.js"></script>
+  <script src="core/gameShutdown.js"></script>
+  <script src="core/gameWorld.js"></script>
+  <script src="core/camera.js"></script>
+</body>
+</html>
