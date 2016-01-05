@@ -3,7 +3,21 @@
 angular.module('HandmadeHero.GameEvents', ['HandmadeHero.ApplicationState','HandmadeHero.Camera'])
     .factory('gameEventService', ['applicationStateService', 'cameraService', function($applicationStateService, $cameraService) {
         
+        var eventLog = [];
+        
         function event(gameEvent) {
+            eventLog.push(gameEvent);
+        }
+        
+        function processEvents() {
+            var numberOfEvents = eventLog.length;
+            
+            for (var i=0; i<numberOfEvents; i++) {
+                _processEvent(eventLog.shift())
+            }
+        }
+        
+        function _processEvent(gameEvent) {
             if (gameEvent.event == 'shutdown') {
                 $applicationStateService.set('continueToRun', false);
             } else if (gameEvent.event == 'cameraPan') {
@@ -21,6 +35,7 @@ angular.module('HandmadeHero.GameEvents', ['HandmadeHero.ApplicationState','Hand
         }
         
         return {
-            event: event
+            event: event,
+            processEvents: processEvents
         }
     }]);
