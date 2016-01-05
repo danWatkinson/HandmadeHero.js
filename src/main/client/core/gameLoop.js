@@ -9,10 +9,14 @@ angular.module('HandmadeHero.GameLoop', ['HandmadeHero.ApplicationState', 'Handm
         var targetElapsedTime_millieconds = (1000 / desiredFrameRate_hz);
 
         function loop() {
-            if (!$applicationStateService.get('continueToRun')) {
-                $gameShutdownService();
+            var loopStart = $performanceService.tick();
+            if ($applicationStateService.get('continueToRun')) {
+                _loop();
             } else {
-                var loopStart = $performanceService.tick();
+                $gameShutdownService();
+            }
+
+            function _loop() {
                 $renderingService.prepareRendering(function() {
                     setTimeout(function() {
                         _tuneSleepAsBestWeCan(loopStart);
@@ -21,7 +25,7 @@ angular.module('HandmadeHero.GameLoop', ['HandmadeHero.ApplicationState', 'Handm
                     },  _calculateSleep(loopStart) );
                 });
             }
-
+            
             function _calculateSleep(startTime_milliseconds) {
                 var elapsedForRendering_milliseconds = (window.performance.now() - startTime_milliseconds);
                 var sleepTime_milliSeconds = ((targetElapsedTime_millieconds - elapsedForRendering_milliseconds) );
