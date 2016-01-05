@@ -3,60 +3,8 @@
 angular.module('HandmadeHero.InputProcessor', ['HandmadeHero.GameEvents'])
     .factory('inputProcessorService', ['gameEventService', function($gameEventService) {
         
-        var key = {
-            ctrl: 17,
-            shift: 16,
-            c: 67,
-            w: 87,
-            s: 83,
-            a: 65,
-            d: 68
-        };
-
-        var inputRules = [
-            {
-                pressed: [key.ctrl, key.c],
-                event: $gameEventService.shutdown
-            },
-            {
-                pressed: [key.shift, key.w],
-                event: $gameEventService.upFast
-            },
-            {
-                pressed: [key.w],
-                notPressed: [key.shift],
-                event: $gameEventService.up
-            },
-            {
-                pressed: [key.shift, key.s],
-                event: $gameEventService.downFast
-            },
-            {
-                pressed: [key.s],
-                notPressed: [key.shift],
-                event: $gameEventService.down
-            },
-            {
-                pressed: [key.shift, key.a],
-                event: $gameEventService.leftFast
-            },
-            {
-                pressed: [key.a],
-                notPressed: [key.shift],
-                event: $gameEventService.left
-            },
-            {
-                pressed: [key.shift, key.d],
-                event: $gameEventService.rightFast
-            },
-            {
-                pressed: [key.d],
-                notPressed: [key.shift],
-                event: $gameEventService.right
-            }
-
-        ];
-
+        var inputRules = [];
+        
         function _ruleIsMet(rule, input) {
             return ( 
                 _allPressed(rule.pressed, input) 
