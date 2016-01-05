@@ -6,6 +6,10 @@ angular.module('HandmadeHero', [
   'HandmadeHero.Performance'
 ])
 .run(['$interval', 'applicationStateService', 'performanceService', function($interval, $applicationStateService, $performanceService) {
-    $applicationStateService.interval($interval($performanceService.checkForFPSWarnings, 1000));
+    setupFPSWarning();
+
+    function setupFPSWarning() {
+        $applicationStateService.interval($interval($performanceService.checkForFPSWarnings, 1000));
+    }
 }]);
 

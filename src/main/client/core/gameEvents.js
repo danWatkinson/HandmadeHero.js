@@ -4,7 +4,7 @@ angular.module('HandmadeHero.GameEvents', ['HandmadeHero.ApplicationState','Hand
     .factory('gameEventService', ['applicationStateService', 'cameraService', function($applicationStateService, $cameraService) {
         
         function event(gameEvent) {
-            if(gameEvent.event == 'shutdown') {
+            if (gameEvent.event == 'shutdown') {
                 $applicationStateService.set('continueToRun', false);
             } else if (gameEvent.event == 'cameraPan') {
                 if (gameEvent.delta.x) {
