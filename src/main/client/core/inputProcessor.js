@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('HandmadeHero.InputProcessor', ['HandmadeHero.GameEvents'])
-    .factory('inputProcessorService', ['gameEventService', function($gameEventService) {
+angular.module('HandmadeHero.InputProcessor', ['HandmadeHero.Input', 'HandmadeHero.GameEvents'])
+    .factory('inputProcessorService', ['inputService', 'gameEventService', function($inputService, $gameEventService) {
         
         var inputRules = [];
         
@@ -42,7 +42,11 @@ angular.module('HandmadeHero.InputProcessor', ['HandmadeHero.GameEvents'])
             inputRules = newRules;
         }
         
-        function process(input) {
+        function generateInputEvents() {
+            _process($inputService.readState());
+        }
+        
+        function _process(input) {
             for (var i=0; i<inputRules.length; i++) {
                 if (_ruleIsMet(inputRules[i], input)) {
                     $gameEventService.event(inputRules[i].event);
@@ -52,7 +56,7 @@ angular.module('HandmadeHero.InputProcessor', ['HandmadeHero.GameEvents'])
         }
 
         return {
-            process: process,
+            generateInputEvents: generateInputEvents,
             setRules: setRules
         }
     }]);

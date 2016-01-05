@@ -13,7 +13,7 @@ angular.module('HandmadeHero.GameEvents', ['HandmadeHero.ApplicationState','Hand
             var numberOfEvents = eventLog.length;
             
             for (var i=0; i<numberOfEvents; i++) {
-                _processEvent(eventLog.shift())
+                _processEvent(eventLog.shift());
             }
         }
         

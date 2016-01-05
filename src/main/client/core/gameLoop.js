@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('HandmadeHero.GameLoop', ['HandmadeHero.ApplicationState', 'HandmadeHero.Performance', 'HandmadeHero.GameEvents', 'HandmadeHero.Rendering', 'HandmadeHero.GameShutdown'])
-      .factory('gameLoopService', ['applicationStateService', 'performanceService', 'gameEventService', 'renderingService', 'gameShutdownService', function($applicationStateService, $performanceService, $gameEventService, $renderingService, $gameShutdownService) {
+angular.module('HandmadeHero.GameLoop', ['HandmadeHero.ApplicationState', 'HandmadeHero.Performance', 'HandmadeHero.InputProcessor', 'HandmadeHero.GameEvents', 'HandmadeHero.Rendering', 'HandmadeHero.GameShutdown'])
+      .factory('gameLoopService', ['applicationStateService', 'performanceService', 'inputProcessorService', 'gameEventService', 'renderingService', 'gameShutdownService', function($applicationStateService, $performanceService, $inputProcessorService, $gameEventService, $renderingService, $gameShutdownService) {
 
         var predictedFipTime_milliseconds = 5.1;
         var predictedLossToSetTimeout_milliseconds = 1;
@@ -17,7 +17,9 @@ angular.module('HandmadeHero.GameLoop', ['HandmadeHero.ApplicationState', 'Handm
             }
 
             function _loop() {
+                $inputProcessorService.generateInputEvents();
                 $gameEventService.processEvents();
+                
                 $renderingService.prepareRendering(function() {
                     setTimeout(function() {
                         _tuneSleepAsBestWeCan(loopStart);
