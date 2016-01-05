@@ -14,12 +14,14 @@ angular.module('HandmadeHero.Performance', ['HandmadeHero.ApplicationState'])
         }
 
         function tick() {
-                var now = window.performance.now();
-                var lastCycle = now - lastTick;
-                lastTick = now;
+            var now = window.performance.now();
+            var lastCycle = now - lastTick;
+            lastTick = now;
 
-                fpsStack.push(lastCycle);
-                if (fpsStack.length > 100) {fpsStack.shift();}
+            fpsStack.push(lastCycle);
+            if (fpsStack.length > 100) {fpsStack.shift();}
+
+            return now;
         }
 
         function fps() {

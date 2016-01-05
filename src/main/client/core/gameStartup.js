@@ -21,8 +21,7 @@ angular.module('HandmadeHero.GameStartup', ['HandmadeHero.ApplicationState', 'Ha
 
             $renderingService.initialise(
                 document.getElementById("screen"),
-                document.getElementById("buffer"),
-                60
+                document.getElementById("buffer")
             );
 
             $renderingService.resize();

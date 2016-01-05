@@ -14,10 +14,10 @@ describe('HandmadeHero.GameLoop module', function() {
         tick: jasmine.createSpy()
     };
     var mockRenderingService = {
-        render: jasmine.createSpy().and.callFake(function(callback) {
+        prepareRendering: jasmine.createSpy().and.callFake(function(callback) {
             callback();
-        })
-
+        }),
+        display: jasmine.createSpy()
     };
     var mockGameShutdownService = jasmine.createSpy();
 
@@ -41,20 +41,24 @@ describe('HandmadeHero.GameLoop module', function() {
         gameShutdownService = _gameShutdownService_;
     }));
 
-    it('calls performanceService.tick()', function() {
-        gameLoopService();
-        expect( performanceService.tick).toHaveBeenCalled();
-    });
-
-    it('calls renderingService.render()', function() {
-        gameLoopService();
-        expect( renderingService.render).toHaveBeenCalled();
-    });
-    
     it('calls gameShutdownService() when applicationStateService.continueToRun = false', function() {
         applicationStateService.set('continueToRun', false);
         gameLoopService();
         expect( gameShutdownService ).toHaveBeenCalled();
+    });
+
+    it('calls performanceService.tick() when applicationStateService.continueToRun = true', function() {
+        applicationStateService.set('continueToRun', true);
+        gameLoopService();
+        expect( performanceService.tick).toHaveBeenCalled();
+        applicationStateService.set('continueToRun', false);
+    });
+
+    it('calls renderingService.render() when applicationStateService.continueToRun = true', function() {
+        applicationStateService.set('continueToRun', true);
+        gameLoopService();
+        expect( renderingService.prepareRendering).toHaveBeenCalled();
+        applicationStateService.set('continueToRun', false);
     });
 
 });
