@@ -41,15 +41,13 @@ angular.module('HandmadeHero.GameMode', ['HandmadeHero.InputProcessor'])
             }
         };
         
-        function mode(newMode) {
-            if (modes[newMode]) {
-                $inputProcessorService.setRules(modes[newMode].inputRules);
-            } else {
-                console.log('unknown game mode');
-            }
-        }
-        
         return {
-            mode: mode
+            mode: function mode(newMode) {
+                if (modes[newMode]) {
+                    $inputProcessorService.setRules(modes[newMode].inputRules);
+                } else {
+                    console.log('unknown game mode');
+                }
+            }
         }
     }]);
