@@ -34,7 +34,7 @@ describe('HandmadeHero.GameEvents module', function() {
     
     it('event:mouse sets the provided mouse data against applicationState.mouse', function() {
         applicationStateService.set('mouse', {});
-        gameEventService.event({event:'mouse', pointer: {my:'mouseData'}});
+        gameEventService.event({event:'mouse', mouseState: {my:'mouseData'}});
         expect( applicationStateService.get('mouse') ).toEqual({my:'mouseData'});
     });
 
