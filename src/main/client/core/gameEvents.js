@@ -21,16 +21,6 @@ angular.module('HandmadeHero.GameEvents', ['HandmadeHero.ApplicationState','Hand
         }
         
         return {
-            event: event,
-            
-            shutdown: {event:'shutdown'},
-            up: {event:'cameraPan', delta: {y:-1}},
-            upFast: {event:'cameraPan', delta: {y:-2}},
-            down: {event:'cameraPan', delta: {y:+1}},
-            downFast: {event:'cameraPan', delta: {y:+2}},
-            left: {event:'cameraPan', delta: {x:-1}},
-            leftFast: {event:'cameraPan', delta: {x:-2}},
-            right: {event:'cameraPan', delta: {x:+1}},
-            rightFast: {event:'cameraPan', delta: {x:+2}}
+            event: event
         }
     }]);
