@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('HandmadeHero.GameLoop', ['HandmadeHero.ApplicationState', 'HandmadeHero.Performance', 'HandmadeHero.InputProcessor', 'HandmadeHero.GameEvents', 'HandmadeHero.Screen.RenderingService', 'HandmadeHero.GameShutdown'])
-      .factory('gameLoopService', ['applicationStateService', 'performanceMonitoringService', 'inputProcessorService', 'gameEventService', 'renderingService', 'gameShutdownService', function($applicationStateService, $performanceMonitoringService, $inputProcessorService, $gameEventService, $renderingService, $gameShutdownService) {
+angular.module('HandmadeHero.GameLoop', ['HandmadeHero.ApplicationState', 'HandmadeHero.Performance', 'HandmadeHero.Input.KeyboardEventEmitter', 'HandmadeHero.Input.MouseEventEmitter', 'HandmadeHero.GameEvents', 'HandmadeHero.Screen.RenderingService', 'HandmadeHero.GameShutdown'])
+      .factory('gameLoopService', ['applicationStateService', 'performanceMonitoringService', 'keyboardEventEmitter', 'mouseEventEmitter', 'gameEventService', 'renderingService', 'gameShutdownService', function($applicationStateService, $performanceMonitoringService, $keyboardEventEmitter, $mouseEventEmitter, $gameEventService, $renderingService, $gameShutdownService) {
 
         function loop() {
             var loopStart = $performanceMonitoringService.tick();
@@ -13,7 +13,8 @@ angular.module('HandmadeHero.GameLoop', ['HandmadeHero.ApplicationState', 'Handm
             }
 
             function _loop() {
-                $inputProcessorService.generateInputEvents();
+                $keyboardEventEmitter.generateInputEvents();
+                $mouseEventEmitter.generateInputEvents();
                 $gameEventService.processEvents();
                 
                 $renderingService.prepareRendering(function() {

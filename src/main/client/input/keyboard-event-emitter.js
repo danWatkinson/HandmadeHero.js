@@ -5,8 +5,8 @@
 // fires the current mouse-status as an event
 //TODO looks like logic has got misplaced around the mouse events.. check rendering code for leakages
 
-angular.module('HandmadeHero.InputProcessor', ['HandmadeHero.Input', 'HandmadeHero.GameEvents'])
-    .factory('inputProcessorService', ['inputService', 'gameEventService', function($inputService, $gameEventService) {
+angular.module('HandmadeHero.Input.KeyboardEventEmitter', ['HandmadeHero.Input.KeyboardHandler', 'HandmadeHero.GameEvents'])
+    .factory('keyboardEventEmitter', ['keyboardHandler', 'gameEventService', function($keyboardHandler, $gameEventService) {
         
         var inputRules = [];
         
@@ -48,7 +48,7 @@ angular.module('HandmadeHero.InputProcessor', ['HandmadeHero.Input', 'HandmadeHe
         }
         
         function generateInputEvents() {
-            _process($inputService.readState());
+            _process($keyboardHandler.readState());
         }
         
         function _process(input) {
@@ -57,7 +57,6 @@ angular.module('HandmadeHero.InputProcessor', ['HandmadeHero.Input', 'HandmadeHe
                     $gameEventService.event(inputRules[i].event);
                 }
             }
-            $gameEventService.event({event: 'mouse', mouseState: input.mouseState});
         }
 
         return {

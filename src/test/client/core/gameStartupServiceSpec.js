@@ -4,7 +4,7 @@ var gameStartupService,
     applicationStateService,
     gameWorldService,
     renderingService,
-    inputService,
+    keyboardHandler,
     $;
 
 describe('HandmadeHero.GameStartup module', function() {
@@ -39,12 +39,12 @@ describe('HandmadeHero.GameStartup module', function() {
         });
     }));
 
-    beforeEach(inject(function (_gameStartupService_, _applicationStateService_, _gameWorldService_, _renderingService_, _inputService_) {
+    beforeEach(inject(function (_gameStartupService_, _applicationStateService_, _gameWorldService_, _renderingService_, _keyboardHandler_) {
         gameStartupService = _gameStartupService_;
         applicationStateService = _applicationStateService_;
         gameWorldService = _gameWorldService_;
         renderingService = _renderingService_;
-        inputService = _inputService_;
+        keyboardHandler = _keyboardHandler_;
     }));
 
     it('binds window.resize to $renderService.resize', function() {
@@ -52,30 +52,30 @@ describe('HandmadeHero.GameStartup module', function() {
         expect( $().resize ).toHaveBeenCalledWith( renderingService.resize );
     });
 
-    it('binds document.keydown to $inputService.keydown', function() {
+    it('binds document.keydown to $keyboardHandler.keydown', function() {
         gameStartupService();
-        expect( $().bind ).toHaveBeenCalledWith( 'keydown', inputService.keydown );
+        expect( $().bind ).toHaveBeenCalledWith( 'keydown', keyboardHandler.keydown );
     });
 
-    it('binds document.keyup to $inputService.keyup', function() {
+    it('binds document.keyup to $keyboardHandler.keyup', function() {
         gameStartupService();
-        expect( $().bind ).toHaveBeenCalledWith( 'keyup', inputService.keyup );
+        expect( $().bind ).toHaveBeenCalledWith( 'keyup', keyboardHandler.keyup );
     });
 
-    it('binds document.mousemove to $inputService.mousemove', function() {
-        gameStartupService();
-        expect( $().bind ).toHaveBeenCalledWith( 'mousemove', inputService.mousemove );
-    });
-
-    it('binds document.mouseup to $inputService.mouseup', function() {
-        gameStartupService();
-        expect( $().bind ).toHaveBeenCalledWith( 'mouseup', inputService.mouseup );
-    });
-
-    it('binds document.mousedown to $inputService.mousedown', function() {
-        gameStartupService();
-        expect( $().bind ).toHaveBeenCalledWith( 'mousedown', inputService.mousedown );
-    });
+//    it('binds document.mousemove to $keyboardHandler.mousemove', function() {
+//        gameStartupService();
+//        expect( $().bind ).toHaveBeenCalledWith( 'mousemove', keyboardHandler.mousemove );
+//    });
+//
+//    it('binds document.mouseup to $keyboardHandler.mouseup', function() {
+//        gameStartupService();
+//        expect( $().bind ).toHaveBeenCalledWith( 'mouseup', keyboardHandler.mouseup );
+//    });
+//
+//    it('binds document.mousedown to $keyboardHandler.mousedown', function() {
+//        gameStartupService();
+//        expect( $().bind ).toHaveBeenCalledWith( 'mousedown', keyboardHandler.mousedown );
+//    });
 
     it('switches off the mouse cursor', function() {
         gameStartupService();

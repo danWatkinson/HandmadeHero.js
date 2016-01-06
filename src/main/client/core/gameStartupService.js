@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('HandmadeHero.GameStartup', ['HandmadeHero.ApplicationState', 'HandmadeHero.GameWorld', 'HandmadeHero.Screen.RenderingService', 'HandmadeHero.Input'])
-    .factory('gameStartupService', ['applicationStateService', 'gameWorldService', 'renderingService', 'inputService', function($applicationStateService, $gameWorldService, $renderingService, $inputService) {
+angular.module('HandmadeHero.GameStartup', ['HandmadeHero.ApplicationState', 'HandmadeHero.GameWorld', 'HandmadeHero.Screen.RenderingService', 'HandmadeHero.Input.KeyboardHandler', 'HandmadeHero.Input.MouseHandler'])
+    .factory('gameStartupService', ['applicationStateService', 'gameWorldService', 'renderingService', 'keyboardHandler', 'mouseHandler', function($applicationStateService, $gameWorldService, $renderingService, $keyboardHandler, $mouseHandler) {
 
         return function startup() {
             _applyWindowEventListeners();
@@ -11,11 +11,12 @@ angular.module('HandmadeHero.GameStartup', ['HandmadeHero.ApplicationState', 'Ha
         function _applyWindowEventListeners() {
             $(window).resize($renderingService.resize);
 
-            $(document).bind('keydown', $inputService.keydown);
-            $(document).bind('keyup', $inputService.keyup);
-            $(document).bind('mousemove', $inputService.mousemove);
-            $(document).bind('mouseup', $inputService.mouseup);
-            $(document).bind('mousedown', $inputService.mousedown);
+            $(document).bind('keydown', $keyboardHandler.keydown);
+            $(document).bind('keyup', $keyboardHandler.keyup);
+            
+            $(document).bind('mousemove', $mouseHandler.mousemove);
+            $(document).bind('mouseup', $mouseHandler.mouseup);
+            $(document).bind('mousedown', $mouseHandler.mousedown);
 
             $('body').css('cursor', 'none');
         }

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('HandmadeHero.GameMode', ['HandmadeHero.GameWorld', 'HandmadeHero.Camera', 'HandmadeHero.InputProcessor', 'HandmadeHero.Screen.RenderingService', 'HandmadeHero.ApplicationState', 'HandmadeHero.GameEvents'])
-    .factory('gameModeService', ['gameWorldService', 'cameraService', 'inputProcessorService', 'renderingService', 'applicationStateService', 'gameEventService', function($gameWorldService, $cameraService, $inputProcessorService, $renderingService, $applicationStateService, $gameEventService) {
+angular.module('HandmadeHero.GameMode', ['HandmadeHero.GameWorld', 'HandmadeHero.Camera', 'HandmadeHero.Input.KeyboardEventEmitter', 'HandmadeHero.Screen.RenderingService', 'HandmadeHero.ApplicationState', 'HandmadeHero.GameEvents'])
+    .factory('gameModeService', ['gameWorldService', 'cameraService', 'keyboardEventEmitter', 'renderingService', 'applicationStateService', 'gameEventService', function($gameWorldService, $cameraService, $keyboardEventEmitter, $renderingService, $applicationStateService, $gameEventService) {
 
         var key = {
             ctrl: 17,
@@ -103,7 +103,7 @@ angular.module('HandmadeHero.GameMode', ['HandmadeHero.GameWorld', 'HandmadeHero
         return {
             mode: function mode(newMode) {
                 if (modes[newMode]) {
-                    $inputProcessorService.setRules(modes[newMode].inputRules);
+                    $keyboardEventEmitter.setRules(modes[newMode].inputRules);
                     $renderingService.setRenderer(modes[newMode].renderer);
                     $gameEventService.setEventProcessor(modes[newMode].eventProcessor);
                 } else {
