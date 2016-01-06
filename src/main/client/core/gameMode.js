@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('HandmadeHero.GameMode', ['HandmadeHero.GameWorld', 'HandmadeHero.Camera', 'HandmadeHero.InputProcessor', 'HandmadeHero.Rendering', 'HandmadeHero.ApplicationState'])
-    .factory('gameModeService', ['gameWorldService', 'cameraService', 'inputProcessorService', 'renderingService', 'applicationStateService', function($gameWorldService, $cameraService, $inputProcessorService, $renderingService, $applicationStateService) {
+angular.module('HandmadeHero.GameMode', ['HandmadeHero.GameWorld', 'HandmadeHero.Camera', 'HandmadeHero.InputProcessor', 'HandmadeHero.Rendering', 'HandmadeHero.ApplicationState', 'HandmadeHero.GameEvents'])
+    .factory('gameModeService', ['gameWorldService', 'cameraService', 'inputProcessorService', 'renderingService', 'applicationStateService', 'gameEventService', function($gameWorldService, $cameraService, $inputProcessorService, $renderingService, $applicationStateService, $gameEventService) {
 
         var key = {
             ctrl: 17,
@@ -38,6 +38,24 @@ angular.module('HandmadeHero.GameMode', ['HandmadeHero.GameWorld', 'HandmadeHero
                     { pressed: [key.shift, key.d], event: events.rightFast },
                     { pressed: [key.d], notPressed: [key.shift], event: events.right }
                 ],
+                eventProcessor:{
+                    processEvent: function(gameEvent) {
+                        if (gameEvent.event == 'shutdown') {
+                            $applicationStateService.set('continueToRun', false);
+                        } else if (gameEvent.event == 'cameraPan') {
+                            if (gameEvent.delta.x) {
+                                $cameraService.x += gameEvent.delta.x;
+                            }
+                            if (gameEvent.delta.y) {
+                                $cameraService.y += gameEvent.delta.y;
+                            }
+                        } else if (gameEvent.event == 'mouse') {
+                            $applicationStateService.set('mouse', gameEvent.mouseState);
+                        } else {
+                            console.log('unrecognisedGameEvent : ' + gameEvent);
+                        }
+                    }
+                },
                 renderer: {
                     prepareRendering: function(bufferContext, width, height) {
                         //TODO leakage - specific information about world living in generic renderer
@@ -87,6 +105,7 @@ angular.module('HandmadeHero.GameMode', ['HandmadeHero.GameWorld', 'HandmadeHero
                 if (modes[newMode]) {
                     $inputProcessorService.setRules(modes[newMode].inputRules);
                     $renderingService.setRenderer(modes[newMode].renderer);
+                    $gameEventService.setEventProcessor(modes[newMode].eventProcessor);
                 } else {
                     console.log('unknown game mode');
                 }
