@@ -3,7 +3,12 @@
 angular.module('HandmadeHero.GameStartup', ['HandmadeHero.ApplicationState', 'HandmadeHero.GameWorld', 'HandmadeHero.Rendering', 'HandmadeHero.Input'])
     .factory('gameStartupService', ['applicationStateService', 'gameWorldService', 'renderingService', 'inputService', function($applicationStateService, $gameWorldService, $renderingService, $inputService) {
 
-        function applyWindowEventListeners() {
+        return function startup() {
+            _applyWindowEventListeners();
+            _initialiseGameServices();
+        };
+
+        function _applyWindowEventListeners() {
             $(window).resize($renderingService.resize);
 
             $(document).bind('keydown', $inputService.keydown);
@@ -15,7 +20,7 @@ angular.module('HandmadeHero.GameStartup', ['HandmadeHero.ApplicationState', 'Ha
             $('body').css('cursor', 'none');
         }
 
-        function initialiseGameServices() {
+        function _initialiseGameServices() {
             $gameWorldService.initialise();
             $applicationStateService.set('continueToRun', true);
 
@@ -27,9 +32,4 @@ angular.module('HandmadeHero.GameStartup', ['HandmadeHero.ApplicationState', 'Ha
             $renderingService.resize();
         }
 
-        return function startup() {
-            applyWindowEventListeners();
-            initialiseGameServices();
-        }
-        
     }]);
