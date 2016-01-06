@@ -1,5 +1,9 @@
 'use strict';
 
+// handles keyboard events, maintaining a 'current state'
+// handles mouse events, maintaining a 'current state'
+//TODO blurrage - one service responsible for keyboard events and mouse events?
+
 angular.module('HandmadeHero.Input', [])
     .factory('inputService', [function() {
         

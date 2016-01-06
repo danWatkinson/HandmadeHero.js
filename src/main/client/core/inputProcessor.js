@@ -1,5 +1,10 @@
 'use strict';
 
+// asks the inputService for the current state
+// checks its current rules for key-combinations that should trigger an event
+// fires the current mouse-status as an event
+//TODO looks like logic has got misplaced around the mouse events.. check rendering code for leakages
+
 angular.module('HandmadeHero.InputProcessor', ['HandmadeHero.Input', 'HandmadeHero.GameEvents'])
     .factory('inputProcessorService', ['inputService', 'gameEventService', function($inputService, $gameEventService) {
         

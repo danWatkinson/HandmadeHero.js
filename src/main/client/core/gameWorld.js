@@ -3,21 +3,34 @@
 angular.module('HandmadeHero.GameWorld', [])
     .factory('gameWorldService', [function() {
         
-        var worldItems;
+        var worldItems = [];
+        var worldAssets = {};
         
         function initialise() {
-            worldItems = [];
             
-            worldItems.push({
-                x: 0,
-                y: 0,
-                background: 'assets/images/baize.jpg'
-            });
-            for (var i = 1; i < 500; i++) {
+            _loadAssets();
+            _loadItems();
+            
+            function _loadAssets() {
+                var image = new Image();
+                image.src = '/assets/images/baize.jpg';
+                image.onload = function() {
+                    //TODO   - wrap into an asset service perhaps?
+                    //console.log('!');
+                };
+                worldAssets['/assets/images/baize.jpg'] = image;
+            }
+
+            function _loadItems() {
                 worldItems.push({
-                    x: (Math.random() * (5000)),
-                    y: (Math.random() * (5000))
+                    background: 'assets/images/baize.jpg'
                 });
+                for (var i = 1; i < 500; i++) {
+                    worldItems.push({
+                        x: (Math.random() * (5000)),
+                        y: (Math.random() * (5000))
+                    });
+                }
             }
         }
         
@@ -25,8 +38,13 @@ angular.module('HandmadeHero.GameWorld', [])
             return worldItems;
         }
 
+        function assets() {
+            return worldAssets;
+        }
+
         return {
             initialise: initialise,
-            items: items
+            items: items,
+            assets: assets
         }
     }]);

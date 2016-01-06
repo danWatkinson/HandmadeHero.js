@@ -18,6 +18,8 @@ angular.module('HandmadeHero.GameEvents', ['HandmadeHero.ApplicationState','Hand
         }
         
         function _processEvent(gameEvent) {
+            //console.log('processing event: ' + JSON.stringify(gameEvent));
+            //TODO leakage
             if (gameEvent.event == 'shutdown') {
                 $applicationStateService.set('continueToRun', false);
             } else if (gameEvent.event == 'cameraPan') {
