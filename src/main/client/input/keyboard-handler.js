@@ -6,16 +6,21 @@
 
 angular.module('HandmadeHero.Input.KeyboardHandler', [])
     .factory('keyboardHandler', [function() {
-        
+
         var keyState = [];
+        
+        function _keydown(e) {
+            keyState[e.keyCode] = true;
+        }
+        
+        function _keyup(e) {
+            keyState[e.keyCode] = false;
+        }
+        
+        $(document).bind('keydown', _keydown);
+        $(document).bind('keyup', _keyup);
 
         return {
-            keydown: function(e) {
-                keyState[e.keyCode] = true;
-            },
-            keyup: function(e) {
-                keyState[e.keyCode] = false;
-            },
             readState: function() {
                 return {
                     keyState: keyState

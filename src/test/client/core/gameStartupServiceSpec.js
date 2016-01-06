@@ -2,33 +2,11 @@
 
 var gameStartupService,
     applicationStateService,
-    gameWorldService,
-    renderingService,
-    keyboardHandler,
-    $;
+    gameWorldService;
 
 describe('HandmadeHero.GameStartup module', function() {
 
-    beforeEach(function() {
-        var mockJQuery = {
-            bind: jasmine.createSpy(),
-            resize: jasmine.createSpy(),
-            css: jasmine.createSpy()
-        };
-        $ = function() {return mockJQuery;}
-    });
-
     beforeEach(module('HandmadeHero.GameStartup'));
-
-    var mockRenderingService = {
-        resize: jasmine.createSpy(),
-        initialise: jasmine.createSpy()
-    };
-    beforeEach(module(function($provide) {
-        $provide.service('renderingService', function () {
-            return mockRenderingService;
-        });
-    }));
 
     var mockGameWorldService= {
         initialise: jasmine.createSpy()
@@ -39,29 +17,27 @@ describe('HandmadeHero.GameStartup module', function() {
         });
     }));
 
-    beforeEach(inject(function (_gameStartupService_, _applicationStateService_, _gameWorldService_, _renderingService_, _keyboardHandler_) {
+    beforeEach(inject(function (_gameStartupService_, _applicationStateService_, _gameWorldService_) {
         gameStartupService = _gameStartupService_;
         applicationStateService = _applicationStateService_;
         gameWorldService = _gameWorldService_;
-        renderingService = _renderingService_;
-        keyboardHandler = _keyboardHandler_;
     }));
 
-    it('binds window.resize to $renderService.resize', function() {
-        gameStartupService();
-        expect( $().resize ).toHaveBeenCalledWith( renderingService.resize );
-    });
-
-    it('binds document.keydown to $keyboardHandler.keydown', function() {
-        gameStartupService();
-        expect( $().bind ).toHaveBeenCalledWith( 'keydown', keyboardHandler.keydown );
-    });
-
-    it('binds document.keyup to $keyboardHandler.keyup', function() {
-        gameStartupService();
-        expect( $().bind ).toHaveBeenCalledWith( 'keyup', keyboardHandler.keyup );
-    });
-
+//    it('binds window.resize to $renderService.resize', function() {
+//        gameStartupService();
+//        expect( $().resize ).toHaveBeenCalledWith( renderingService.resize );
+//    });
+//
+//    it('binds document.keydown to $keyboardHandler.keydown', function() {
+//        gameStartupService();
+//        expect( $().bind ).toHaveBeenCalledWith( 'keydown', keyboardHandler.keydown );
+//    });
+//
+//    it('binds document.keyup to $keyboardHandler.keyup', function() {
+//        gameStartupService();
+//        expect( $().bind ).toHaveBeenCalledWith( 'keyup', keyboardHandler.keyup );
+//    });
+//
 //    it('binds document.mousemove to $keyboardHandler.mousemove', function() {
 //        gameStartupService();
 //        expect( $().bind ).toHaveBeenCalledWith( 'mousemove', keyboardHandler.mousemove );
@@ -76,12 +52,12 @@ describe('HandmadeHero.GameStartup module', function() {
 //        gameStartupService();
 //        expect( $().bind ).toHaveBeenCalledWith( 'mousedown', keyboardHandler.mousedown );
 //    });
-
-    it('switches off the mouse cursor', function() {
-        gameStartupService();
-        expect( $().css ).toHaveBeenCalledWith( 'cursor', 'none' );
-    });
-
+//
+//    it('switches off the mouse cursor', function() {
+//        gameStartupService();
+//        expect( $().css ).toHaveBeenCalledWith( 'cursor', 'none' );
+//    });
+//
     it('initialises the gameworld', function() {
         gameStartupService();
         expect( gameWorldService.initialise ).toHaveBeenCalled();

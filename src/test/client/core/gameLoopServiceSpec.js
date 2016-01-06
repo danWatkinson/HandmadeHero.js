@@ -4,7 +4,8 @@ var gameLoopService,
     applicationStateService,
     performanceMonitoringService,
     renderingService,
-    gameShutdownService;
+    gameShutdownService,
+    $;
 
 describe('HandmadeHero.GameLoop module', function() {
 
@@ -31,6 +32,12 @@ describe('HandmadeHero.GameLoop module', function() {
         $provide.service('gameShutdownService', function() {
             return mockGameShutdownService;
         });
+        var mockJQuery = {
+            bind: jasmine.createSpy(),
+            resize: jasmine.createSpy(),
+            css: jasmine.createSpy()
+        };
+        $ = function() {return mockJQuery;}
     }));
 
     beforeEach(inject(function (_gameLoopService_, _applicationStateService_, _performanceMonitoringService_, _renderingService_, _gameShutdownService_) {
