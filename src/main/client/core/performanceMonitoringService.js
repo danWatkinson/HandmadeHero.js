@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('HandmadeHero.Performance', ['HandmadeHero.ApplicationState'])
-    .factory('performanceService', ['$interval', 'applicationStateService', function($interval, $applicationStateService) {
+    .factory('performanceMonitoringService', ['$interval', 'applicationStateService', function($interval, $applicationStateService) {
         var start = window.performance.now();
         var lastTick = start;
         var fpsStack = [];

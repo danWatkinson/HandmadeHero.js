@@ -6,7 +6,7 @@ angular.module('HandmadeHero', [
   'HandmadeHero.ApplicationState',
   'HandmadeHero.Performance'
 ])
-.run(['$interval', 'applicationStateService', 'performanceService', 'gameModeService', function($interval, $applicationStateService, $performanceService, $gameModeService) {
+.run(['$interval', 'applicationStateService', 'performanceMonitoringService', 'gameModeService', function($interval, $applicationStateService, $performanceMonitoringService, $gameModeService) {
     setupFPSWarning();
     setGameMode();
         
@@ -15,7 +15,7 @@ angular.module('HandmadeHero', [
     }
         
     function setupFPSWarning() {
-        $applicationStateService.interval($interval($performanceService.checkForFPSWarnings, 1000));
+        $applicationStateService.interval($interval($performanceMonitoringService.checkForFPSWarnings, 1000));
     }
 }]);
 

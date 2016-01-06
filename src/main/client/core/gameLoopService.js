@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('HandmadeHero.GameLoop', ['HandmadeHero.ApplicationState', 'HandmadeHero.Performance', 'HandmadeHero.InputProcessor', 'HandmadeHero.GameEvents', 'HandmadeHero.Rendering', 'HandmadeHero.GameShutdown'])
-      .factory('gameLoopService', ['applicationStateService', 'performanceService', 'inputProcessorService', 'gameEventService', 'renderingService', 'gameShutdownService', function($applicationStateService, $performanceService, $inputProcessorService, $gameEventService, $renderingService, $gameShutdownService) {
+      .factory('gameLoopService', ['applicationStateService', 'performanceMonitoringService', 'inputProcessorService', 'gameEventService', 'renderingService', 'gameShutdownService', function($applicationStateService, $performanceMonitoringService, $inputProcessorService, $gameEventService, $renderingService, $gameShutdownService) {
 
         function loop() {
-            var loopStart = $performanceService.tick();
+            var loopStart = $performanceMonitoringService.tick();
             
             if ($applicationStateService.get('continueToRun')) {
                 _loop();

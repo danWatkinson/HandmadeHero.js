@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('HandmadeHero.GameEvents', ['HandmadeHero.ApplicationState','HandmadeHero.Camera'])
-    .factory('gameEventService', ['applicationStateService', 'cameraService', function($applicationStateService, $cameraService) {
+angular.module('HandmadeHero.GameEvents', [])
+    .factory('gameEventService', [function() {
         
         var eventLog = [];
         var eventProcessor = {processEvent: function(){}};

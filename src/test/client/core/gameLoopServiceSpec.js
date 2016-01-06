@@ -2,7 +2,7 @@
 
 var gameLoopService,
     applicationStateService,
-    performanceService,
+    performanceMonitoringService,
     renderingService,
     gameShutdownService;
 
@@ -10,7 +10,7 @@ describe('HandmadeHero.GameLoop module', function() {
 
     beforeEach(module('HandmadeHero.GameLoop'));
 
-    var mockPerformanceService = {
+    var mockPerformanceMonitoringService = {
         tick: jasmine.createSpy()
     };
     var mockRenderingService = {
@@ -22,8 +22,8 @@ describe('HandmadeHero.GameLoop module', function() {
     var mockGameShutdownService = jasmine.createSpy();
 
     beforeEach(module(function($provide) {
-        $provide.service('performanceService', function() {
-            return mockPerformanceService;
+        $provide.service('performanceMonitoringService', function() {
+            return mockPerformanceMonitoringService;
         });
         $provide.service('renderingService', function() {
             return mockRenderingService;
@@ -33,10 +33,10 @@ describe('HandmadeHero.GameLoop module', function() {
         });
     }));
 
-    beforeEach(inject(function (_gameLoopService_, _applicationStateService_, _performanceService_, _renderingService_, _gameShutdownService_) {
+    beforeEach(inject(function (_gameLoopService_, _applicationStateService_, _performanceMonitoringService_, _renderingService_, _gameShutdownService_) {
         gameLoopService = _gameLoopService_;
         applicationStateService = _applicationStateService_;
-        performanceService = _performanceService_;
+        performanceMonitoringService = _performanceMonitoringService_;
         renderingService = _renderingService_;
         gameShutdownService = _gameShutdownService_;
     }));
@@ -47,10 +47,10 @@ describe('HandmadeHero.GameLoop module', function() {
         expect( gameShutdownService ).toHaveBeenCalled();
     });
 
-    it('calls performanceService.tick() when applicationStateService.continueToRun = true', function() {
+    it('calls performanceMonitoringService.tick() when applicationStateService.continueToRun = true', function() {
         applicationStateService.set('continueToRun', true);
         gameLoopService();
-        expect( performanceService.tick).toHaveBeenCalled();
+        expect( performanceMonitoringService.tick).toHaveBeenCalled();
         applicationStateService.set('continueToRun', false);
     });
 
