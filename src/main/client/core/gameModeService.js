@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('HandmadeHero.GameMode', ['HandmadeHero.GameWorld', 'HandmadeHero.Camera', 'HandmadeHero.InputProcessor', 'HandmadeHero.Rendering', 'HandmadeHero.ApplicationState', 'HandmadeHero.GameEvents'])
+angular.module('HandmadeHero.GameMode', ['HandmadeHero.GameWorld', 'HandmadeHero.Camera', 'HandmadeHero.InputProcessor', 'HandmadeHero.Screen.RenderingService', 'HandmadeHero.ApplicationState', 'HandmadeHero.GameEvents'])
     .factory('gameModeService', ['gameWorldService', 'cameraService', 'inputProcessorService', 'renderingService', 'applicationStateService', 'gameEventService', function($gameWorldService, $cameraService, $inputProcessorService, $renderingService, $applicationStateService, $gameEventService) {
 
         var key = {

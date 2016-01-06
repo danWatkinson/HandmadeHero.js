@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('HandmadeHero.GameStartup', ['HandmadeHero.ApplicationState', 'HandmadeHero.GameWorld', 'HandmadeHero.Rendering', 'HandmadeHero.Input'])
+angular.module('HandmadeHero.GameStartup', ['HandmadeHero.ApplicationState', 'HandmadeHero.GameWorld', 'HandmadeHero.Screen.RenderingService', 'HandmadeHero.Input'])
     .factory('gameStartupService', ['applicationStateService', 'gameWorldService', 'renderingService', 'inputService', function($applicationStateService, $gameWorldService, $renderingService, $inputService) {
 
         return function startup() {

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('HandmadeHero.Screen.screenDirective', ['HandmadeHero.Rendering'])
+angular.module('HandmadeHero.Screen.ScreenDirective', ['HandmadeHero.Screen.RenderingService'])
     .directive('screen', ['renderingService', function($renderingService) {
 
         function compile( element, attributes, transclude ) {

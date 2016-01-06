@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('HandmadeHero.Rendering', [])
+angular.module('HandmadeHero.Screen.RenderingService', [])
     .factory('renderingService', [function() {
 
         var screenCanvas;

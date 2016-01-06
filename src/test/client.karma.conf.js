@@ -8,13 +8,16 @@ module.exports = function(config){
       '../main/client/bower_components/angular-mocks/angular-mocks.js',
       '../main/client/app.js',
       '../main/client/core/**/*.js',
+      '../main/client/directives/**/*.js',
 
       './client/**/*.js',
-      './client/core/**/*.js'
+      './client/core/**/*.js',
+      './client/directives/**/*.js'
     ],
     preprocessors: {
         '../main/client/app.js': 'coverage',
-        '../main/client/core/**/*.js': 'coverage'
+        '../main/client/core/**/*.js': 'coverage',
+        '../main/client/directives/**/*.js': 'coverage'
     },
     autoWatch : true,
 
