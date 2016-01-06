@@ -58,41 +58,44 @@ angular.module('HandmadeHero.GameMode', ['HandmadeHero.GameWorld', 'HandmadeHero
                 },
                 renderer: {
                     prepareRendering: function(bufferContext, width, height) {
-                        //TODO leakage - specific information about world living in generic renderer
-                        var grd = bufferContext.createLinearGradient(0, 0, width, 0);
-                        grd.addColorStop(0, "red");
-                        grd.addColorStop(1, "white");
+                        
+                        if (bufferContext) {
 
-                        bufferContext.fillStyle = grd;
+                            var grd = bufferContext.createLinearGradient(0, 0, width, 0);
+                            grd.addColorStop(0, "red");
+                            grd.addColorStop(1, "white");
 
-                        for (var i = 0; i<$gameWorldService.items().length; i++) {
-                            var item = $gameWorldService.items()[i];
-                            if (item.background) {
-                                for (var y=0; y< 100; y++) {
-                                    for (var x=0; x< 100; x++ ){
-                                        bufferContext.drawImage($gameWorldService.assets()['/assets/images/baize.jpg'], (x*181)- $cameraService.x, (y*190)- $cameraService.y);
+                            bufferContext.fillStyle = grd;
+
+                            for (var i = 0; i<$gameWorldService.items().length; i++) {
+                                var item = $gameWorldService.items()[i];
+                                if (item.background) {
+                                    for (var y=0; y< 100; y++) {
+                                        for (var x=0; x< 100; x++ ){
+                                            bufferContext.drawImage($gameWorldService.assets()['/assets/images/baize.jpg'], (x*181)- $cameraService.x, (y*190)- $cameraService.y);
+                                        }
                                     }
+                                } else {
+                                    bufferContext.fillRect(item.x - $cameraService.x, item.y - $cameraService.y, 100, 100);
                                 }
-                            } else {
-                                bufferContext.fillRect(item.x - $cameraService.x, item.y - $cameraService.y, 100, 100);
                             }
-                        }
 
-                        //TODO leakage - hard-coded mouse behaviour
-                        var mouse = $applicationStateService.get('mouse');
-                        if (mouse && mouse.x) {
-                            var radius = mouse.click ? 5 : 10;
-                            bufferContext.lineWidth = 10;
-                            bufferContext.strokeStyle = 'blue';
-                            bufferContext.beginPath();
-                            bufferContext.arc(mouse.x, mouse.y, radius,0,2*Math.PI);
-                            bufferContext.stroke();
-
-                            if (mouse.click) {
-                                bufferContext.moveTo(mouse.clickLocation.x, mouse.clickLocation.y);
-                                bufferContext.lineTo(mouse.x,mouse.y);
+                            var mouse = $applicationStateService.get('mouse');
+                            if (mouse && mouse.x) {
+                                var radius = mouse.click ? 5 : 10;
+                                bufferContext.lineWidth = 10;
+                                bufferContext.strokeStyle = 'blue';
+                                bufferContext.beginPath();
+                                bufferContext.arc(mouse.x, mouse.y, radius,0,2*Math.PI);
                                 bufferContext.stroke();
+
+                                if (mouse.click) {
+                                    bufferContext.moveTo(mouse.clickLocation.x, mouse.clickLocation.y);
+                                    bufferContext.lineTo(mouse.x,mouse.y);
+                                    bufferContext.stroke();
+                                }
                             }
+                            
                         }
                     }
                 }
