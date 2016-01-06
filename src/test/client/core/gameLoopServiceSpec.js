@@ -4,7 +4,6 @@ var gameLoopService,
     applicationStateService,
     performanceMonitoringService,
     renderingService,
-    gameShutdownService,
     $;
 
 describe('HandmadeHero.GameLoop module', function() {
@@ -20,7 +19,6 @@ describe('HandmadeHero.GameLoop module', function() {
         }),
         display: jasmine.createSpy()
     };
-    var mockGameShutdownService = jasmine.createSpy();
 
     beforeEach(module(function($provide) {
         $provide.service('performanceMonitoringService', function() {
@@ -29,29 +27,28 @@ describe('HandmadeHero.GameLoop module', function() {
         $provide.service('renderingService', function() {
             return mockRenderingService;
         });
-        $provide.service('gameShutdownService', function() {
-            return mockGameShutdownService;
-        });
         var mockJQuery = {
             bind: jasmine.createSpy(),
+            unbind: jasmine.createSpy(),
             resize: jasmine.createSpy(),
             css: jasmine.createSpy()
         };
         $ = function() {return mockJQuery;}
     }));
 
-    beforeEach(inject(function (_gameLoopService_, _applicationStateService_, _performanceMonitoringService_, _renderingService_, _gameShutdownService_) {
+    beforeEach(inject(function (_gameLoopService_, _applicationStateService_, _performanceMonitoringService_, _renderingService_) {
         gameLoopService = _gameLoopService_;
         applicationStateService = _applicationStateService_;
+        applicationStateService.shutdown = jasmine.createSpy();
+
         performanceMonitoringService = _performanceMonitoringService_;
         renderingService = _renderingService_;
-        gameShutdownService = _gameShutdownService_;
     }));
 
-    it('calls gameShutdownService() when applicationStateService.continueToRun = false', function() {
+    it('calls applicationStateService.shutdown() when applicationStateService.continueToRun = false', function() {
         applicationStateService.set('continueToRun', false);
         gameLoopService();
-        expect( gameShutdownService ).toHaveBeenCalled();
+        expect( applicationStateService.shutdown ).toHaveBeenCalled();
     });
 
     it('calls performanceMonitoringService.tick() when applicationStateService.continueToRun = true', function() {

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('HandmadeHero.GameLoop', ['HandmadeHero.ApplicationState', 'HandmadeHero.Performance', 'HandmadeHero.Input.KeyboardEventEmitter', 'HandmadeHero.Input.MouseEventEmitter', 'HandmadeHero.GameEvents', 'HandmadeHero.Screen.RenderingService', 'HandmadeHero.GameShutdown'])
-      .factory('gameLoopService', ['applicationStateService', 'performanceMonitoringService', 'keyboardEventEmitter', 'mouseEventEmitter', 'gameEventService', 'renderingService', 'gameShutdownService', function($applicationStateService, $performanceMonitoringService, $keyboardEventEmitter, $mouseEventEmitter, $gameEventService, $renderingService, $gameShutdownService) {
+angular.module('HandmadeHero.GameLoop', ['HandmadeHero.ApplicationState', 'HandmadeHero.Performance', 'HandmadeHero.Input.KeyboardEventEmitter', 'HandmadeHero.Input.MouseEventEmitter', 'HandmadeHero.GameEvents', 'HandmadeHero.Screen.RenderingService'])
+      .factory('gameLoopService', ['applicationStateService', 'performanceMonitoringService', 'keyboardEventEmitter', 'mouseEventEmitter', 'gameEventService', 'renderingService', function($applicationStateService, $performanceMonitoringService, $keyboardEventEmitter, $mouseEventEmitter, $gameEventService, $renderingService) {
 
         function loop() {
             var loopStart = $performanceMonitoringService.tick();
@@ -9,7 +9,7 @@ angular.module('HandmadeHero.GameLoop', ['HandmadeHero.ApplicationState', 'Handm
             if ($applicationStateService.get('continueToRun')) {
                 _loop();
             } else {
-                $gameShutdownService();
+                $applicationStateService.shutdown();
             }
 
             function _loop() {

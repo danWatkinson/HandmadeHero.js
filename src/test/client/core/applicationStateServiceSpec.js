@@ -17,14 +17,14 @@ describe('HandmadeHero.ApplicationState module', function() {
         expect(applicationStateService.get(key)).toEqual(myValue);
     });
     
-    it('holds references to any angular $intervals that we set up, so that we can cancel them during shutdown..', function() {
-        var anInterval = {an:'interval'};
-        var anotherInterval = {another:'interval'};
-
-        applicationStateService.interval(anInterval);
-        applicationStateService.interval(anotherInterval);
-
-        expect( applicationStateService.intervals() ).toEqual( [anInterval, anotherInterval] );
-    });
+//    it('holds references to any angular $intervals that we set up, so that we can cancel them during shutdown..', function() {
+//        var anInterval = {an:'interval'};
+//        var anotherInterval = {another:'interval'};
+//
+//        applicationStateService.interval(anInterval);
+//        applicationStateService.interval(anotherInterval);
+//
+//        expect( applicationStateService.intervals() ).toEqual( [anInterval, anotherInterval] );
+//    });
 });
 

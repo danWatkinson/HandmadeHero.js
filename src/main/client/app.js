@@ -9,26 +9,27 @@ angular.module('HandmadeHero', [
   'HandmadeHero.Screen'
 ])
 .run(['$interval', 'gameWorldService', 'applicationStateService', 'performanceMonitoringService', 'gameModeService', 'gameLoopService', function($interval, $gameWorldService, $applicationStateService, $performanceMonitoringService, $gameModeService, $gameLoopService) {
-    setupFPSWarning();
-    setGameMode();
-    initialiseTheWorld();
-    start();
+    
+        setupFPSWarning();
+        setGameMode();
+        initialiseTheWorld();
+        start();
 
-    function setGameMode() {
-        $gameModeService.mode('test');
-    }
+        function setGameMode() {
+            $gameModeService.mode('test');
+        }
 
-    function setupFPSWarning() {
-        $applicationStateService.interval($interval($performanceMonitoringService.checkForFPSWarnings, 1000));
-    }
+        function setupFPSWarning() {
+            $applicationStateService.interval($performanceMonitoringService.checkForFPSWarnings, 1000);
+        }
 
-    function initialiseTheWorld() {
-        $gameWorldService.initialise();
-    }
+        function initialiseTheWorld() {
+            $gameWorldService.initialise();
+        }
 
-    function start() {
-        $applicationStateService.set('continueToRun', true);
-        $gameLoopService();
-    }
+        function start() {
+            $applicationStateService.set('continueToRun', true);
+            $gameLoopService();
+        }
 }]);
 
