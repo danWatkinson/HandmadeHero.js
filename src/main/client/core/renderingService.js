@@ -13,14 +13,15 @@ angular.module('HandmadeHero.Rendering', [])
         
         var renderer;
 
-        function initialise(screen, buffer) {
-            screenCanvas = screen;
-            height = $(screen).attr('height');
-            width = $(screen).attr('width');
-            
+        function initialise(id) {
+            screenCanvas = document.getElementById(id);
+            bufferCanvas = document.getElementById(id+'_buffer');
+
             screenContext = screenCanvas.getContext("2d");
-            bufferCanvas = buffer;
             bufferContext = bufferCanvas.getContext("2d");
+
+            height = $(screenCanvas).attr('height');
+            width = $(screenCanvas).attr('width');
         }
 
         function resize() {
@@ -29,7 +30,7 @@ angular.module('HandmadeHero.Rendering', [])
             
             $(screenCanvas).attr('width', width)
                            .attr('height', height);
-            
+
             $(bufferCanvas).attr('width', width)
                            .attr('height', height);
         }

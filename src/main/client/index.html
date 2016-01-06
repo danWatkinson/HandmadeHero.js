@@ -9,9 +9,8 @@
 </head>
 <body ng-controller="gameController">
 
-  <canvas id="screen"></canvas>
-  <canvas id="buffer" ng-hide="true"></canvas>
-
+  <canvas screen id="screen1" ></canvas>
+  
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/angular/angular.js"></script>
 
@@ -29,5 +28,9 @@
   <script src="core/gameShutdownService.js"></script>
   <script src="core/gameWorldService.js"></script>
   <script src="core/cameraService.js"></script>
+  
+  <script src="directives/screen/screen.js"></script>
+  <script src="directives/screen/screen-directive.js"></script>
+
 </body>
 </html>

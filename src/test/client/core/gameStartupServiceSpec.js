@@ -91,16 +91,5 @@ describe('HandmadeHero.GameStartup module', function() {
         gameStartupService();
         expect( applicationStateService.get('continueToRun') ).toEqual(true);
     });
-    
-    it('initialises the renderingService', function() {
-        //TODO prove that we're passing the right elements..
-        gameStartupService();
-        expect( renderingService.initialise).toHaveBeenCalled();
-    });
-
-    it('calls resize on the renderingService (to force the app to fullscreen)', function() {
-        gameStartupService();
-        expect( renderingService.resize ).toHaveBeenCalled();
-    });
 });
 

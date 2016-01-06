@@ -23,13 +23,6 @@ angular.module('HandmadeHero.GameStartup', ['HandmadeHero.ApplicationState', 'Ha
         function _initialiseGameServices() {
             $gameWorldService.initialise();
             $applicationStateService.set('continueToRun', true);
-
-            $renderingService.initialise(
-                document.getElementById("screen"),
-                document.getElementById("buffer")
-            );
-
-            $renderingService.resize();
         }
 
     }]);

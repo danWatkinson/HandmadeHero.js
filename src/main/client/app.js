@@ -4,7 +4,8 @@ angular.module('HandmadeHero', [
   'HandmadeHero.GameController',
   'HandmadeHero.GameMode',
   'HandmadeHero.ApplicationState',
-  'HandmadeHero.Performance'
+  'HandmadeHero.Performance',
+  'HandmadeHero.Screen'
 ])
 .run(['$interval', 'applicationStateService', 'performanceMonitoringService', 'gameModeService', function($interval, $applicationStateService, $performanceMonitoringService, $gameModeService) {
     setupFPSWarning();
