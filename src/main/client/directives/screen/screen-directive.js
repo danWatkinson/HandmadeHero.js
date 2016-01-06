@@ -15,30 +15,9 @@ angular.module('HandmadeHero.Screen.screenDirective', ['HandmadeHero.Rendering']
         }
 
         function link( $scope, element, attributes ) {
-            
-//            var children = element.children()
-//                .removeClass('fadeIn')
-//                .addClass('fadedOut');
-//
-//            $scope.$on('displayChild', function(event, index) {
-//
-//                element
-//                    .find(":nth-child("+ index +")")
-//                        .removeClass('fadedOut')
-//                        .addClass('fadeIn');
-//
-//                if (index < children.length) {
-//                    setTimeout(function() {
-//                        $scope.$emit('displayChild', ++index);
-//                    }, 1000);
-//                }
-//
-//            });
 
-            $scope.$emit('displayChild', 0);
         }
 
-        // Return the directive configuration.
         return({
             compile: compile,
             restrict: 'A'
