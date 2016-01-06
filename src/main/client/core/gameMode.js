@@ -79,6 +79,7 @@ angular.module('HandmadeHero.GameMode', ['HandmadeHero.GameWorld', 'HandmadeHero
                     }
                 }
             }
+
         };
         
         return {
