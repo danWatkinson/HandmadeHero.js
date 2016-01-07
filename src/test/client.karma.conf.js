@@ -9,11 +9,13 @@ module.exports = function(config){
       '../main/client/app.js',
       '../main/client/core/**/*.js',
       '../main/client/directives/**/*.js',
+      '../main/client/directives/screen/**/*.js',
       '../main/client/input/**/*.js',
 
       './client/**/*.js',
       './client/core/**/*.js',
       './client/directives/**/*.js',
+      './client/directives/screen/**/*.js',
       './client/input/**/*.js'
     ],
     preprocessors: {

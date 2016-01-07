@@ -4,12 +4,11 @@ angular.module('HandmadeHero.Screen.ScreenDirective', ['HandmadeHero.Screen.Rend
     .directive('screen', ['renderingService', function($renderingService) {
 
         function compile( element, attributes, transclude ) {
-            var id = attributes['id'];
+            var id = element.attr('id');
             var buffer = '<canvas id="' + id + '_buffer"  ng-hide="true"></canvas>';
             element.prepend(buffer);
 
-            $renderingService.initialise(attributes.id);
-            $renderingService.resize();
+            $renderingService.initialise(id);
 
             return( link );
         }

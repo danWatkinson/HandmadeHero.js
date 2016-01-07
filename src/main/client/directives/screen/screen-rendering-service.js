@@ -24,6 +24,7 @@ angular.module('HandmadeHero.Screen.RenderingService', [])
             width = $(screenCanvas).attr('width');
 
             $(window).resize(resize);
+            resize();
         }
 
         function resize() {
