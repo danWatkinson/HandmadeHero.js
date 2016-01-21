@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+- '0.10'
+script:
+- npm test
+deploy:
+  provider: heroku
+  api_key:
+    secure: Kywjo/mHlEdpqBDI99ef2UixrPMaXAEpw9lQuxLQCn/EB/Vq7YNOkTsU6uQ3w15XXHInBnyC3nt2usnHbTV0wuHi9CT/2uJmyanULMShCS87hfgQDsjQvivVLDSFo+b7d0x9MZ1ptmCymgq+PthBnBQ6Ax7Z+wZmGCoYmrnWXU27Oe4mFOgmsnxwHHYgLInuhnv1dSb7Gs3tXG8Wj7Rp8L+rGf7TxSfDkKGwexFj+GF1rf/31fOOHA6ndsUfYcT3QJohtYCB5dG7v/SSDtRj6zsZK/I38S7NazfoTUVpvVk5eMXkS97Q9YcJCP9x8FlE9pPLFIkQdBdF87z0Vd4BEtXnWEbZlU0L7LTZ4DrutO9ljNuAzBVeFpyqBh5AETq7F0Qkv5EOU+oxjQi8hIK8QPtwDZ0K5J6yaAqS8PXFzJo+3nT0dW9mgeMIuGEIQfaLcrmwOCcmiAElLcFxnNvS6h5hCALYvAL/xr+NI0d/PXCJ6WlYoj5swvNFaUCWF3cdSdEsE/jU4b6fSBjLFKMLvPiMj/FN7EhlXL9svmIk09RIh58T+BSB1zDU3g/CpB2LKP2/3SaHdQX6xrGOZiaTP8cJ8DxU/YxpdoYsds8hX30J6PPbVbeL/deG6O8Qcu0pu5Ka9yx8vl54rygxh7HIVgJChZcJORR4Wl1dCKdiWxo=
+  app: HandmadeHero.js
+  on:
+    repo: danWatkinson/HandmadeHero.js
