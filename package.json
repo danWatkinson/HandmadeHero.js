@@ -33,8 +33,9 @@
     "jsdom": "~3.1.2"
   },
   "scripts": {
-    "postinstall": "bower install",
-
+    "postinstall": "npm run bower-install && npm run update-webdriver",
+    "bower-install":  "bower install",
+    "update-webdriver": "webdriver-manager update",
     "start": "node src/main/www",
 
     "test": "npm run test-server && npm run test-single-run",
@@ -44,7 +45,7 @@
     "localCI": "npm install && karma start src/test/client.karma.conf.js",
 
     "preprotractor": "npm run update-webdriver",
-        "update-webdriver": "webdriver-manager update",
+        
     "protractor": "protractor src/test/e2e/protractor.conf.js"
 
   }
