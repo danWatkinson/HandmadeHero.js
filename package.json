@@ -16,7 +16,6 @@
     "jasmine-core": "^2.3.4",
     "karma": "~0.12",
     "karma-coverage": "latest",
-    "karma-chrome-launcher": "^0.1.12",
     "karma-firefox-launcher": "^0.1.6",
     "karma-jasmine": "^0.3.5",
     "karma-junit-reporter": "^0.2.2",
@@ -44,8 +43,6 @@
     
     "localCI": "npm install && karma start src/test/client.karma.conf.js",
 
-    "preprotractor": "npm run update-webdriver",
-        
     "protractor": "protractor src/test/e2e/protractor.conf.js"
 
   }
